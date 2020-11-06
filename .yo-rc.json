@@ -38,6 +38,7 @@
     "enableTranslation": true,
     "nativeLanguage": "vi",
     "languages": ["vi"],
-    "blueprints": []
+    "blueprints": [],
+    "lastLiquibaseTimestamp": 1604676975000
   }
 }
