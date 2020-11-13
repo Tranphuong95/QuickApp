@@ -99,9 +99,13 @@ const apiUrl = 'api/messages';
 
 // Actions
 
+// export const getEntities: ICrudGetAllAction<IMessage> = (page, size, sort) => ({
+//   type: ACTION_TYPES.FETCH_MESSAGE_LIST,
+//   payload: axios.get<IMessage>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
+// });
 export const getEntities: ICrudGetAllAction<IMessage> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_MESSAGE_LIST,
-  payload: axios.get<IMessage>(`${apiUrl}?cacheBuster=${new Date().getTime()}`),
+  payload: axios.get<IMessage>('http://localhost:8080/api/message/0'),
 });
 
 export const getEntity: ICrudGetAction<IMessage> = id => {

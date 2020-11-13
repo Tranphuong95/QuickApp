@@ -52,6 +52,7 @@ public class MessageResource {
         if (message.getId() != null) {
             throw new BadRequestAlertException("A new message cannot already have an ID", ENTITY_NAME, "idexists");
         }
+
         Message result = messageRepository.save(message);
         return ResponseEntity.created(new URI("/api/messages/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
@@ -114,5 +115,45 @@ public class MessageResource {
         log.debug("REST request to delete Message : {}", id);
         messageRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * @PathVariable lấy giá trị  path để đưa vào biến đó
+     *
+     * ví dụ :  /api/message/{id}   localhost:8080/api/message/12345
+     * id 12345
+     *
+     *
+     *
+     * @RequestBody lấy dữ liệu ở body
+     *
+     *
+     * @RequestParam
+     * /api/message?namSinh=98&ten=tung  thì requestParam là namSinh và ten
+     *
+     * {@code GET  /messages} : get all the messages.
+     *
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of messages in body.
+     */
+//    @GetMapping("/message/{message}")
+//    public List<Message> searchMessages(@PathVariable String message) {
+//        log.debug("hiển thị ra dữ liệu truyền vào: {}" ,message );
+//        return messageRepository.findTop10ByMessageAfter(message);
+//    }
+
+//    @GetMapping("message/{message}")
+//      public List<Message>findMessage(@PathVariable String message){
+//        log.debug("hien thi ra de truyen du lieu vao: {}", message);
+//        return messageRepository.findByMessage(message);
+//    }
+//    @GetMapping("message/{id}")
+//    public List<Message>findMessage(@PathVariable Long id){
+//        log.debug("hien thi ra de truyen du lieu vao: {}", id);
+//        return messageRepository.findTop10ByIdBefore(id);
+//    }
+    @GetMapping("message/{id}")
+    public List<Message>findMessage(@PathVariable Long id){
+        log.debug("hien thi ra de truyen du lieu vao: {}", id);
+        return messageRepository.findTop10ByMaxId(id);
     }
 }
