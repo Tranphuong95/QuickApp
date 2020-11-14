@@ -41,7 +41,9 @@ public interface MessageRepository extends JpaRepository<Message, Long>
 //  @Query(value="SELECT  m FROM Message as m  ORDER BY m.id Limit=10" ,nativeQuery=true)
 //  public List<Message>findTop10ByMaxId(Long id);
   //test
-  @Query(value="SELECT * FROM Message ORDER BY id DESC Limit 10", nativeQuery = true)
+//  @Query(value="SELECT * FROM Message ORDER BY id DESC Limit 10", nativeQuery = true)
+//  public List<Message>findTop10ByMaxId(Long id);
+  @Query(value="SELECT * FROM (SELECT TOP 10 * FROM Message ORDER BY id DESC) ORDER BY id", nativeQuery = true)
   public List<Message>findTop10ByMaxId(Long id);
 
 }
