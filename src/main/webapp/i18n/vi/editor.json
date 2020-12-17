@@ -1,0 +1,22 @@
+{
+  "quicklyappApp": {
+    "editor": {
+      "home": {
+        "title": "Editors",
+        "createLabel": "Thêm mới một Editor",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Editor",
+        "notFound": "No Editors found"
+      },
+      "created": "Một Editor mới được tạo với định danh {{ param }}",
+      "updated": "Một Editor cập nhật với định danh {{ param }}",
+      "deleted": "Một Editor đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Editor {{ id }}?"
+      },
+      "detail": {
+        "title": "Editor"
+      },
+      "editor": "Editor"
+    }
+  }
+}

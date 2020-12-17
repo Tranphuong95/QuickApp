@@ -16,6 +16,10 @@ import passwordReset, { PasswordResetState } from 'app/modules/account/password-
 import message, {
   MessageState
 } from 'app/entities/message/message.reducer';
+// prettier-ignore
+import editor, {
+  EditorState
+} from 'app/entities/editor/editor.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -30,6 +34,7 @@ export interface IRootState {
   readonly password: PasswordState;
   readonly settings: SettingsState;
   readonly message: MessageState;
+  readonly editor: EditorState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -46,6 +51,7 @@ const rootReducer = combineReducers<IRootState>({
   password,
   settings,
   message,
+  editor,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });
