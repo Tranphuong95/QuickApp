@@ -18,7 +18,25 @@ export const Editor = (props: IEditorProps) => {
     props.getEntities();
   }, []);
 
+
   const { editorList, match, loading } = props;
+  // const showData=()=>{
+  //   let result=null;
+  //   if(editorList.length>0){
+  //     result=editorList.map((editor, i)=>{
+  //       // const a = JSON.parse(editor.editor);
+  //       const a = editor.editor;
+  //       const b = "{\"blocks\":[{\"key\":\"6bcn8\",\"text\":\"aaaa\",\"type\":\"unstyled\",\"depth\":0,\"inlineStyleRanges\":[],\"entityRanges\":[],\"data\":{}}],\"entityMap\":{}}";
+  //       const c = JSON.parse(b);
+  //       return(
+  //         <div key={i+10101}>
+  //           {c.blocks[0].text}
+  //         </div>
+  //       );
+  //     })
+  //   }
+  //   return result;
+  // }
   return (
     <div>
       <h2 id="editor-heading">
@@ -51,9 +69,12 @@ export const Editor = (props: IEditorProps) => {
                       {editor.id}
                     </Button>
                   </td>
+                  {/*<td>{editor.editor}</td>*/}
 
-                  <td dangerouslySetInnerHTML={{__html: draftToHtml(editor.editor)}}></td>
-
+                  {/*<td>{showDataJson()}</td>*/}
+                  {/*<td><div dangerouslySetInnerHTML={{__html: draftToHtml(showDataJson())}}></div></td>*/}
+                  <td dangerouslySetInnerHTML={{__html: draftToHtml(JSON.parse(editor.editor))}}></td>
+                  {/*{showData()}*/}
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${editor.id}`} color="info" size="sm">
@@ -90,6 +111,7 @@ export const Editor = (props: IEditorProps) => {
       </div>
     </div>
   );
+
 };
 
 const mapStateToProps = ({ editor }: IRootState) => ({

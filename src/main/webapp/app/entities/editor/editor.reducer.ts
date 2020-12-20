@@ -120,14 +120,14 @@ export const createEntity: ICrudPutAction<IEditor> = entity => async dispatch =>
   dispatch(getEntities());
   return result;
 };
-export const cE: ICrudPutAction<IEditor> = entity => async dispatch => {
-  const result = await dispatch({
-    type: ACTION_TYPES.CREATE_EDITOR,
-    payload: axios.post(apiUrl, entity),
-  });
-  dispatch(getEntities());
-  return result;
-};
+// export const cE: ICrudPutAction<IEditor> = entity => async dispatch => {
+//   const result = await dispatch({
+//     type: ACTION_TYPES.CREATE_EDITOR,
+//     payload: axios.post(apiUrl, cleanEntity(entity)),
+//   });
+//   dispatch(getEntities());
+//   return result;
+// };
 
 export const updateEntity: ICrudPutAction<IEditor> = entity => async dispatch => {
   const result = await dispatch({
