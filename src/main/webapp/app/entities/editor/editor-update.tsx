@@ -18,7 +18,7 @@
 //   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
 //
 //   const { editorEntity, loading, updating } = props;
-//
+// window.console.log(editorEntity)
 //   const handleClose = () => {
 //     props.history.push('/editor');
 //   };
@@ -120,7 +120,6 @@
 // type DispatchProps = typeof mapDispatchToProps;
 //
 // export default connect(mapStateToProps, mapDispatchToProps)(EditorUpdate);
-// import 'editorStyles.scss'
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -133,12 +132,11 @@ import { IRootState } from 'app/shared/reducers';
 import { getEntity, updateEntity, createEntity, reset} from './editor.reducer';
 import { IEditor } from 'app/shared/model/editor.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
-import { mapIdList } from 'app/shared/util/entity-utils';
+import {cleanEntity, mapIdList} from 'app/shared/util/entity-utils';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState,RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
-// import draftToHtml from 'draftjs-to-html';
 
 // //todo: up load image below
 const getFileBase64 = (file, callback) => {
@@ -178,6 +176,7 @@ const imageUploadCallback = file => new Promise(
 //   );
 // }
 
+//
 export interface IEditorUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EditorUpdate = (props: IEditorUpdateProps) => {
@@ -187,13 +186,15 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
   // const { loading, updating } = props;
 
   const [editorState, setEditorState]=useState(()=>EditorState.createEmpty());
-  useEffect(() => {
-    props.reset()
-  }, []);
   const contentState=editorState.getCurrentContent();
   const contentRaw=JSON.stringify(convertToRaw(contentState));
   const dataJs=JSON.parse(contentRaw)
+  const editorEntityEaw:any=editorEntity;
   const edsState={editor:contentRaw};
+  window.console.log(editorEntity.editor)
+  window.console.log(contentRaw)
+  const idEntity=props.match.params.id;
+  window.console.log(contentState)
   const handleClose = () => {
     props.history.push('/editor');
   };
@@ -204,6 +205,11 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
       props.getEntity(props.match.params.id);
     }
   }, []);
+  useEffect(()=>{
+    if(editorEntityEaw.editor &&editorEntityEaw.editor!==null && props.match.params.id){
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(editorEntityEaw.editor))))
+    }
+  },[editorEntityEaw])
   useEffect(() => {
     if (props.updateSuccess) {
       handleClose();
@@ -213,7 +219,7 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
   const saveEntity = (event, errors, values) => {
     if (errors.length === 0) {
       const entity = {
-          ...editorEntity,
+        ...editorEntity,
         // ...values,
         ...edsState as {}
       };
@@ -225,13 +231,7 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
       }
     }
   };
-  const editorEntityRaw:any = editorEntity;
-  window.console.log(editorEntityRaw.editor)
-  useEffect(()=>{
-    if(editorEntityRaw.editor && editorEntityRaw.editor!==null){
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(editorEntityRaw.editor))));
-    }
-  },[])
+
 //
 //   return (
 //     <div>
