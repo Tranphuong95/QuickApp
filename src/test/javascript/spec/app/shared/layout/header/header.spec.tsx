@@ -7,7 +7,7 @@ import LoadingBar from 'react-redux-loading-bar';
 import { Navbar, Nav } from 'reactstrap';
 
 import { Home, Brand } from 'app/shared/layout/header/header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from 'app/shared/layout/menus';
+import {AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu, ProductsMenu} from 'app/shared/layout/menus';
 import Header from 'app/shared/layout/header/header';
 
 describe('Header', () => {
@@ -66,6 +66,7 @@ describe('Header', () => {
     expect(nav.find(AdminMenu).length).toEqual(1);
     expect(nav.find(EntitiesMenu).length).toEqual(1);
     expect(nav.find(LocaleMenu).length).toEqual(1);
+    expect(nav.find(ProductsMenu).length).toEqual(1); //todo test 27/12
 
     expect(nav.find(AccountMenu).length).toEqual(1);
     const ribbon = component.find('.ribbon.dev');
@@ -85,6 +86,7 @@ describe('Header', () => {
     expect(nav.find(AdminMenu).length).toEqual(1);
     expect(nav.find(EntitiesMenu).length).toEqual(1);
     expect(nav.find(LocaleMenu).length).toEqual(1);
+    expect(nav.find(ProductsMenu).length).toEqual(1); //todo test 27/12
 
     expect(nav.find(AccountMenu).length).toEqual(1);
     const ribbon = component.find('.ribbon.dev');
@@ -96,6 +98,7 @@ describe('Header', () => {
     expect(nav.find(AdminMenu).length).toEqual(0);
     expect(nav.find(EntitiesMenu).length).toEqual(1);
     const account = nav.find(AccountMenu);
+    expect(nav.find(ProductsMenu).length).toEqual(1); //todo test 27/12
     expect(account.first().props().isAuthenticated).toEqual(true);
   });
 

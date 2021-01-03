@@ -7,7 +7,6 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import Message from './message';
 import Editor from './editor';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
-
 const Routes = ({ match }) => (
   <div>
     <Switch>

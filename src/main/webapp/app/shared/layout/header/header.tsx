@@ -8,8 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink as Link } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 
-import { Home, Brand } from './header-components';
-import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu } from '../menus';
+import {Home, Brand, Products} from './header-components';
+import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu,ProductsMenu } from '../menus';
 
 export interface IHeaderProps {
   isAuthenticated: boolean;
@@ -38,7 +38,7 @@ const Header = (props: IHeaderProps) => {
         </a>
       </div>
     ) : null;
-
+  window.console.log(props.isAuthenticated)
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   /* jhipster-needle-add-element-to-menu - JHipster will add new menu items here */
@@ -53,6 +53,7 @@ const Header = (props: IHeaderProps) => {
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ml-auto" navbar>
             <Home />
+            <ProductsMenu/>
             {props.isAuthenticated && <EntitiesMenu />}
             {props.isAuthenticated && props.isAdmin && (
               <AdminMenu showSwagger={props.isSwaggerEnabled} showDatabase={!props.isInProduction} />

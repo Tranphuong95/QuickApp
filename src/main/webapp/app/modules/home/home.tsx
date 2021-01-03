@@ -12,7 +12,7 @@ export type IHomeProp = StateProps;
 
 export const Home = (props: IHomeProp) => {
   const { account } = props;
-
+  window.console.log(account)
   return (
     <Row>
       <Col md="9">

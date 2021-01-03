@@ -138,50 +138,49 @@ import { EditorState,RichUtils, convertToRaw, convertFromRaw} from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import draftToHtml from 'draftjs-to-html';
 
-// //todo: up load image below
-const getFileBase64 = (file, callback) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  // Since FileReader is asynchronous,
-  // we need to pass data back.
-  reader.onload = () => callback(reader.result);
-  // TODO: catch an error
-  reader.onerror = error => {};
-};
-
-const imageUploadCallback = file => new Promise(
-  (resolve, reject) => getFileBase64(
-    file,
-    data => resolve({ data: { link: data } })
-  )
-);
-// function uploadImageCallBack(file) {
-//   return new Promise(
-//     (resolve, reject) => {
-//       const xhr = new XMLHttpRequest();
-//       xhr.open('POST', 'https://api.imgur.com/3/image');
-//       xhr.setRequestHeader('Authorization', 'Client-ID ##clientid##');
-//       const data = new FormData();
-//       data.append('image', file);
-//       xhr.send(data);
-//       xhr.addEventListener('load', () => {
-//         const response = JSON.parse(xhr.responseText);
-//         resolve(response);
-//       });
-//       xhr.addEventListener('error', () => {
-//         const error = JSON.parse(xhr.responseText);
-//         reject(error);
-//       });
-//     }
-//   );
-// }
+// // //todo: up load image below
+// const getFileBase64 = (file, callback) => {
+//   const reader = new FileReader();
+//   reader.readAsDataURL(file);
+//   // Since FileReader is asynchronous,
+//   // we need to pass data back.
+//   reader.onload = () => callback(reader.result);
+//   // TODO: catch an error
+//   reader.onerror = error => {};
+// };
+//
+// const imageUploadCallback = file => new Promise(
+//   (resolve, reject) => getFileBase64(
+//     file,
+//     data => resolve({ data: { link: data } })
+//   )
+// );
+function uploadImageCallBack(file) {
+  return new Promise(
+    (resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://api.imgur.com/3/image');
+      xhr.setRequestHeader('Authorization', 'Client-ID c166b3ccc22b789');
+      const data = new FormData();
+      data.append('image', file);
+      xhr.send(data);
+      xhr.addEventListener('load', () => {
+        const response = JSON.parse(xhr.responseText);
+        resolve(response);
+      });
+      xhr.addEventListener('error', () => {
+        const error = JSON.parse(xhr.responseText);
+        reject(error);
+      });
+    }
+  );
+}
 
 //
 export interface IEditorUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const EditorUpdate = (props: IEditorUpdateProps) => {
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
-
   const { editorEntity, loading, updating } = props;
   // const { loading, updating } = props;
 
@@ -189,12 +188,12 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
   const contentState=editorState.getCurrentContent();
   const contentRaw=JSON.stringify(convertToRaw(contentState));
   const dataJs=JSON.parse(contentRaw)
-  const editorEntityEaw:any=editorEntity;
+  const editorEntityRaw:any=editorEntity;
   const edsState={editor:contentRaw};
   window.console.log(editorEntity.editor)
   window.console.log(contentRaw)
-  const idEntity=props.match.params.id;
   window.console.log(contentState)
+  window.console.log(props.match.params.id)
   const handleClose = () => {
     props.history.push('/editor');
   };
@@ -206,10 +205,10 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
     }
   }, []);
   useEffect(()=>{
-    if(editorEntityEaw.editor &&editorEntityEaw.editor!==null && props.match.params.id){
-      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(editorEntityEaw.editor))))
+    if(editorEntityRaw.editor &&editorEntityRaw.editor!==null && props.match.params.id){
+      setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(editorEntityRaw.editor))))
     }
-  },[editorEntityEaw])
+  },[editorEntityRaw])
   useEffect(() => {
     if (props.updateSuccess) {
       handleClose();
@@ -304,11 +303,11 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
                   toolbarClassName="toolbar-class"
                   onEditorStateChange={setEditorState}
                   toolbar={{
-                    image: {
-                      uploadCallback: imageUploadCallback,
-                      previewImage: true,
-                    },
-                    // image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: true } },
+                    // image: {
+                    //   uploadCallback: imageUploadCallback,
+                    //   previewImage: true,
+                    // },
+                    image: { uploadCallback: uploadImageCallBack, alt: { present: true, mandatory: true }, previewImage: true },
                   }}
                 />
               </AvGroup>
