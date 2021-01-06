@@ -1,0 +1,21 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "tensanpham",
+      "fieldType": "String",
+      "fieldValidateRules": []
+    }
+  ],
+  "changelogDate": "20210104031835",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "productest",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

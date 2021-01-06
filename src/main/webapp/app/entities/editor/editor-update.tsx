@@ -120,6 +120,7 @@
 // type DispatchProps = typeof mapDispatchToProps;
 //
 // export default connect(mapStateToProps, mapDispatchToProps)(EditorUpdate);
+import './editorStyles.scss'
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -334,7 +335,7 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
           )}
         </Col>
       </Row>
-      <div dangerouslySetInnerHTML={{__html: draftToHtml(dataJs)}}></div>
+      <div className="show-html" dangerouslySetInnerHTML={{__html: draftToHtml(dataJs)}}></div>
     </div>
   );
 };

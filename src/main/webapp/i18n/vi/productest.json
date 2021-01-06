@@ -1,0 +1,22 @@
+{
+  "quicklyappApp": {
+    "productest": {
+      "home": {
+        "title": "Productests",
+        "createLabel": "Thêm mới một Productest",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Productest",
+        "notFound": "No Productests found"
+      },
+      "created": "Một Productest mới được tạo với định danh {{ param }}",
+      "updated": "Một Productest cập nhật với định danh {{ param }}",
+      "deleted": "Một Productest đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Productest {{ id }}?"
+      },
+      "detail": {
+        "title": "Productest"
+      },
+      "tensanpham": "Tensanpham"
+    }
+  }
+}

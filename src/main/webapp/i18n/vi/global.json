@@ -9,6 +9,8 @@
         "main": "Thực thể",
         "message": "Message",
         "editor": "Editor",
+        "productest": "Productest",
+        "device": "Device",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

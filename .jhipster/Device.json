@@ -1,0 +1,48 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "tensanpham",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "kichthuocmatthung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "kichthuocthanthung",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phukien",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "chatlieu",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "baohanh",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "diachi",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "hotline",
+      "fieldType": "String"
+    }
+  ],
+  "changelogDate": "20210104045907",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "device",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

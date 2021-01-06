@@ -20,6 +20,14 @@ import message, {
 import editor, {
   EditorState
 } from 'app/entities/editor/editor.reducer';
+// prettier-ignore
+import productest, {
+  ProductestState
+} from 'app/entities/productest/productest.reducer';
+// prettier-ignore
+import device, {
+  DeviceState
+} from 'app/entities/device/device.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -35,6 +43,8 @@ export interface IRootState {
   readonly settings: SettingsState;
   readonly message: MessageState;
   readonly editor: EditorState;
+  readonly productest: ProductestState;
+  readonly device: DeviceState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -52,6 +62,8 @@ const rootReducer = combineReducers<IRootState>({
   settings,
   message,
   editor,
+  productest,
+  device,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

@@ -1,0 +1,29 @@
+{
+  "quicklyappApp": {
+    "device": {
+      "home": {
+        "title": "Devices",
+        "createLabel": "Thêm mới một Device",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Device",
+        "notFound": "No Devices found"
+      },
+      "created": "Một Device mới được tạo với định danh {{ param }}",
+      "updated": "Một Device cập nhật với định danh {{ param }}",
+      "deleted": "Một Device đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Device {{ id }}?"
+      },
+      "detail": {
+        "title": "Device"
+      },
+      "tensanpham": "Tensanpham",
+      "kichthuocmatthung": "Kichthuocmatthung",
+      "kichthuocthanthung": "Kichthuocthanthung",
+      "phukien": "Phukien",
+      "chatlieu": "Chatlieu",
+      "baohanh": "Baohanh",
+      "diachi": "Diachi",
+      "hotline": "Hotline"
+    }
+  }
+}
