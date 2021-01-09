@@ -10,13 +10,14 @@ import { getEntities } from './productest.reducer';
 import { IProductest } from 'app/shared/model/productest.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+
 export interface IProductestProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
 export const Productest = (props: IProductestProps) => {
   useEffect(() => {
     props.getEntities();
   }, []);
-
   const { productestList, match, loading } = props;
   return (
     <div>
@@ -50,7 +51,13 @@ export const Productest = (props: IProductestProps) => {
                       {productest.id}
                     </Button>
                   </td>
-                  <td>{productest.tensanpham}</td>
+                  {/*<td>{productest.tensanpham}</td>*/}
+                  {/*<td dangerouslySetInnerHTML={{__html: productest.tensanpham}}></td>*/}
+                  <td>
+                    <FroalaEditorView
+                      model={productest.tensanpham}
+                    />
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${productest.id}`} color="info" size="sm">

@@ -84,7 +84,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/account/reset-password/finish").permitAll()
             .antMatchers("/api/editors").permitAll() //todo test 6/1
             .antMatchers("/api/devices").permitAll() //todo test 6/1
+            .antMatchers("/api/protests").permitAll() //todo test 7/1
+//            .antMatchers(HttpMethod.POST).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+//            .antMatchers(HttpMethod.PUT).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+//            .antMatchers(HttpMethod.DELETE).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+//            .antMatchers(HttpMethod.PATCH).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+//            .antMatchers(HttpMethod.POST,"/api/**").authenticated()//todo test 9/1
+            .antMatchers(HttpMethod.POST,"/api/**").hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+            .antMatchers(HttpMethod.PUT,"/api/**").hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+            .antMatchers(HttpMethod.DELETE,"/api/**").hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
+            .antMatchers(HttpMethod.PATCH,"/api/**").hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
             .antMatchers("/api/**").authenticated()
+            .antMatchers("/api/images").permitAll()
             .antMatchers("/websocket/tracker").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/websocket/**").permitAll()
             .antMatchers("/management/health").permitAll()

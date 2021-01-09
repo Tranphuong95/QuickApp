@@ -12,17 +12,49 @@ import { IProductest } from 'app/shared/model/productest.model';
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
+
+import ReactDOM from 'react-dom';
+
+
+// Require Editor CSS files.
+import 'froala-editor/css/froala_style.min.css';
+import 'froala-editor/css/froala_editor.pkgd.min.css';
+
+import 'froala-editor/js/plugins.pkgd.min.js';
+
+import FroalaEditor from 'react-froala-wysiwyg'; //todo import important!
+import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg'
+// import Froalaeditor from 'froala-editor';
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
+// import FroalaEditorA from 'react-froala-wysiwyg/FroalaEditorA';
+// import FroalaEditorButton from 'react-froala-wysiwyg/FroalaEditorButton';
+// import FroalaEditorImg from 'react-froala-wysiwyg/FroalaEditorImg';
+// import FroalaEditorInput from 'react-froala-wysiwyg/FroalaEditorInput';
+
+
 export interface IProductestUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export const ProductestUpdate = (props: IProductestUpdateProps) => {
   const [isNew, setIsNew] = useState(!props.match.params || !props.match.params.id);
+  const [contentState, setContentState]=useState('')
 
   const { productestEntity, loading, updating } = props;
 
+  const productestEditorEntity:any=productestEntity;
+  const handleModelChange=(model)=>{
+    setContentState(model)
+    // setContentState(event)
+    // window.console.log(event)
+  }
+  const productTestState={tensanpham:contentState};
   const handleClose = () => {
     props.history.push('/productest');
   };
-
+  useEffect(()=>{
+    if(productestEditorEntity.tensanpham && productestEditorEntity.tensanpham!==null && props.match.params.id){
+      setContentState(productestEditorEntity.tensanpham)
+    }
+  },[productestEditorEntity])
   useEffect(() => {
     if (isNew) {
       props.reset();
@@ -42,6 +74,7 @@ export const ProductestUpdate = (props: IProductestUpdateProps) => {
       const entity = {
         ...productestEntity,
         ...values,
+        ...productTestState as {}
       };
 
       if (isNew) {
@@ -81,6 +114,31 @@ export const ProductestUpdate = (props: IProductestUpdateProps) => {
                 </Label>
                 <AvField id="productest-tensanpham" type="text" name="tensanpham" />
               </AvGroup>
+              <FroalaEditor
+                model={contentState}
+                onModelChange={handleModelChange}
+                config={{
+                  imageUploadURL: 'http://localhost:8080/api/images',
+                  imageUploadParam: 'img',
+                  // Allow to upload PNG and JPG.
+                  imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
+                  // Set request type.
+                  imageUploadMethod: 'POST',
+
+                  imageUpload: true,
+
+
+                  // imageUploadParams: { Authorization:'Client-ID c166b3ccc22b789' }
+
+                  // imageUploadURL:'https://api.imgur.com/3/image',
+                  // imageUploadParams: {Authorization:'Client-ID c166b3ccc22b789'},
+                  // imageUploadMethod: 'POST'
+                }}
+              />
+              <FroalaEditorImg/>
+              <FroalaEditorView
+                model={contentState}
+              />
               <Button tag={Link} id="cancel-save" to="/productest" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;

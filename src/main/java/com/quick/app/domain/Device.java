@@ -4,6 +4,7 @@ import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.io.Serializable;
 
@@ -42,7 +43,8 @@ public class Device implements Serializable {
     @Column(name = "diachi")
     private String diachi;
 
-    @Column(name = "hotline")
+    @Size(max = 200000)
+    @Column(name = "hotline", length = 200000)
     private String hotline;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

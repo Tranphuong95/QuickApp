@@ -12,7 +12,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -114,5 +116,32 @@ public class ProductestResource {
         log.debug("REST request to delete Productest : {}", id);
         productestRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code POST  /productests} : Create a new productest.
+     *
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new productest, or with status {@code 400 (Bad Request)} if the productest has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+
+    //todo test upload image since 9/1/2021
+    @PostMapping("/images")
+    public String saveImage(@RequestParam MultipartFile img) throws URISyntaxException {
+        log.debug("REST request to saveImage : {}", img.isEmpty());
+        try
+        {
+            log.debug("REST request to saveImage : {}", img.getBytes());
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+        return "{\n" +
+          "    \"link\" : \"https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg\"\n" +
+          "}";
     }
 }

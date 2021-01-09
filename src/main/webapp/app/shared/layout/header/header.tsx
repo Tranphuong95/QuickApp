@@ -8,7 +8,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NavLink as Link } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 
-import {Home, Brand, Products} from './header-components';
+// import {Home, Brand, Products, FilterSearch} from './header-components';
+import {Home, Brand, FilterSearch} from './header-components';
+
 import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu,ProductsMenu } from '../menus';
 
 export interface IHeaderProps {
@@ -50,11 +52,13 @@ const Header = (props: IHeaderProps) => {
       <Navbar dark expand="sm" fixed="top" className="jh-navbar">
         <NavbarToggler aria-label="Menu" onClick={toggleMenu} />
         <Brand />
+        <FilterSearch/>
         <Collapse isOpen={menuOpen} navbar>
           <Nav id="header-tabs" className="ml-auto" navbar>
             <Home />
             <ProductsMenu/>
-            {props.isAuthenticated && <EntitiesMenu />}
+            {/*{props.isAuthenticated && <EntitiesMenu />}*/} {/*todo test block 9/1/2021*/}
+            {props.isAdmin && <EntitiesMenu />} {/*todo test 9/1/2021*/}
             {props.isAuthenticated && props.isAdmin && (
               <AdminMenu showSwagger={props.isSwaggerEnabled} showDatabase={!props.isInProduction} />
             )}

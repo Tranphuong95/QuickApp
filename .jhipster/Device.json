@@ -33,7 +33,9 @@
     },
     {
       "fieldName": "hotline",
-      "fieldType": "String"
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "200000"
     }
   ],
   "changelogDate": "20210104045907",

@@ -10,7 +10,6 @@ import { getEntities } from './editor.reducer';
 import { IEditor } from 'app/shared/model/editor.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import draftToHtml from 'draftjs-to-html';
-
 export interface IEditorProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
 export const Editor = (props: IEditorProps) => {
@@ -20,6 +19,7 @@ export const Editor = (props: IEditorProps) => {
 
 
   const { editorList, match, loading } = props;
+  window.console.log(editorList)
   // const showData=()=>{
   //   let result=null;
   //   if(editorList.length>0){

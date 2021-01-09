@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class DeviceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/devices")
-    public ResponseEntity<Device> createDevice(@RequestBody Device device) throws URISyntaxException {
+    public ResponseEntity<Device> createDevice(@Valid @RequestBody Device device) throws URISyntaxException {
         log.debug("REST request to save Device : {}", device);
         if (device.getId() != null) {
             throw new BadRequestAlertException("A new device cannot already have an ID", ENTITY_NAME, "idexists");
@@ -68,7 +69,7 @@ public class DeviceResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/devices")
-    public ResponseEntity<Device> updateDevice(@RequestBody Device device) throws URISyntaxException {
+    public ResponseEntity<Device> updateDevice(@Valid @RequestBody Device device) throws URISyntaxException {
         log.debug("REST request to update Device : {}", device);
         if (device.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");

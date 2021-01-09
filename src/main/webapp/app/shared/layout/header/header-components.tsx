@@ -5,6 +5,11 @@ import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
 import { NavLink as Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { AvFeedback, AvForm, AvGroup, AvInput, AvField ,AvBaseInput } from 'availity-reactstrap-validation';
+import { Button} from 'reactstrap';
+import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import PostFilterForm from'./../../../modules/post-filter-form/post-filter-form';
+
 import appConfig from 'app/config/constants';
 
 export const BrandIcon = props => (
@@ -42,3 +47,20 @@ export const Products = props => (
     </NavLink>
   </NavItem>
 );
+export const FilterSearch = props =>{
+  function handleFiltersChange(newFilters)
+  {
+    window.console.log('newFilters',newFilters)
+  }
+  return (
+    <NavItem>
+      <PostFilterForm onSubmit={handleFiltersChange}/>
+      {/*<AvForm>*/}
+      {/*  <span>*/}
+      {/*    */}
+      {/*  </span>*/}
+      {/*  /!*<Button type="submit"><FontAwesomeIcon icon={faSearch} size="1x"/></Button>*!/*/}
+      {/*</AvForm>*/}
+    </NavItem>
+  );
+}
