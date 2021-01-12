@@ -152,7 +152,7 @@ public class MessageResource {
 //        return messageRepository.findTop10ByIdBefore(id);
 //    }
     @GetMapping("message/{id}")
-    public List<Message>findMessage(@PathVariable Long id){
+    public List<Message>findMesage(@PathVariable Long id){
         log.debug("hien thi ra de truyen du lieu vao: {}", id);
         return messageRepository.findTop10ByMaxId(id);
     }

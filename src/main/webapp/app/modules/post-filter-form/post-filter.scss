@@ -1,0 +1,10 @@
+.none-suggest-search {
+  display: none;
+}
+.suggest-search {
+  position: absolute;
+  background: #f1f1f1;
+  z-index: 1000;
+  overflow-y: auto;
+  width: 200px;
+}

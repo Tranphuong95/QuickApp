@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect}from 'react';
 import { Translate } from 'react-jhipster';
 
 import { NavItem, NavLink, NavbarBrand } from 'reactstrap';
@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AvFeedback, AvForm, AvGroup, AvInput, AvField ,AvBaseInput } from 'availity-reactstrap-validation';
 import { Button} from 'reactstrap';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import qs from 'qs';
 import PostFilterForm from'./../../../modules/post-filter-form/post-filter-form';
 
 import appConfig from 'app/config/constants';
@@ -48,13 +50,32 @@ export const Products = props => (
   </NavItem>
 );
 export const FilterSearch = props =>{
-  function handleFiltersChange(newFilters)
+  const [filters, setFilters]=useState({keyword:''});
+  const [postFilter, setPostFilter]=useState([]);
+  useEffect(()=>{
+    window.console.log(filters.keyword.length)
+    if(filters.keyword.length>0){
+      axios({
+        method: 'get',
+        url: 'http://localhost:9000/api/product-search',
+        params:filters,
+        data: null
+      }).then(res=> {
+        window.console.log(res.data)
+        setPostFilter(res.data)
+        window.console.log(postFilter)
+      });
+    }
+    return setPostFilter([])
+  },[filters])
+  function handleFiltersChange(newKeyword)
   {
-    window.console.log('newFilters',newFilters)
+    window.console.log(newKeyword)
+    setFilters(newKeyword)
   }
   return (
     <NavItem>
-      <PostFilterForm onSubmit={handleFiltersChange}/>
+      <PostFilterForm onSubmit={handleFiltersChange} postList={postFilter}/>
       {/*<AvForm>*/}
       {/*  <span>*/}
       {/*    */}
