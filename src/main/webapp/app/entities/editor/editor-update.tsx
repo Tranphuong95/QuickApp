@@ -206,7 +206,7 @@ export const EditorUpdate = (props: IEditorUpdateProps) => {
     }
   }, []);
   useEffect(()=>{
-    if(editorEntityRaw.editor &&editorEntityRaw.editor!==null && props.match.params.id){
+    if(editorEntityRaw.editor && editorEntityRaw.editor!==null && props.match.params.id){
       setEditorState(EditorState.createWithContent(convertFromRaw(JSON.parse(editorEntityRaw.editor))))
     }
   },[editorEntityRaw])

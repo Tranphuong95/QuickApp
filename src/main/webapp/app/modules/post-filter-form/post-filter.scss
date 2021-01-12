@@ -3,8 +3,25 @@
 }
 .suggest-search {
   position: absolute;
-  background: #f1f1f1;
+  background: white;
   z-index: 1000;
   overflow-y: auto;
-  width: 200px;
+  width: 274px;
+  margin-top: 12px;
+  .list-result {
+    border: 1px solid #dfdfdf;
+    ul {
+      li {
+        padding: 6px 12px;
+      }
+    }
+  }
+}
+.post-filter-form {
+  .form-group {
+    margin: 0;
+    .form-control {
+      width: 274px;
+    }
+  }
 }
