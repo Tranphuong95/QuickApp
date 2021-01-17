@@ -28,6 +28,7 @@ function useComponentVisible(initialIsVisible) {
     if (ref.current && !ref.current.contains(event.target)) {
       setIsComponentVisible(false);
     }
+    window.console.log(ref.current.contains(event.target))
   };
 
   useEffect(() => {

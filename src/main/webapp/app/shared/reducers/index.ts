@@ -28,6 +28,11 @@ import productest, {
 import device, {
   DeviceState
 } from 'app/entities/device/device.reducer';
+// prettier-ignore
+// import cartshop,{
+//   CartShopState
+// } from "app/products/shopcart/cart.reducer";
+
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -45,6 +50,7 @@ export interface IRootState {
   readonly editor: EditorState;
   readonly productest: ProductestState;
   readonly device: DeviceState;
+  // readonly cartshop: CartShopState; //todo add 15/1
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -64,6 +70,7 @@ const rootReducer = combineReducers<IRootState>({
   editor,
   productest,
   device,
+  // cartshop, //todo add 15/1
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar,
 });

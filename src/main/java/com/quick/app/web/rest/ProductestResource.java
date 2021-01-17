@@ -130,25 +130,25 @@ public class ProductestResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
 
-    //todo test upload image since 9/1/2021
-    @PostMapping("/images")
-    public String saveImage(@RequestParam MultipartFile img) throws URISyntaxException {
-        log.debug("REST request to saveImage : {}", img.isEmpty());
-        try
-        {
-            log.debug("REST request to saveImage : {}", img.getBytes());
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-
-
-        return "{\n" +
-          "    \"link\" : \"https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg\"\n" +
-          "}";
-    }
+//    //todo test upload image since 9/1/2021
+//    @PostMapping("/images")
+//    public String saveImage(@RequestParam MultipartFile img) throws URISyntaxException {
+//        log.debug("REST request to saveImage : {}", img.isEmpty());
+//        try
+//        {
+//            log.debug("REST request to saveImage : {}", img.getBytes());
+//        }
+//        catch (IOException e)
+//        {
+//            e.printStackTrace();
+//        }
+//
+//
+//
+//        return "{\n" +
+//          "    \"link\" : \"https://helpx.adobe.com/content/dam/help/en/stock/how-to/visual-reverse-image-search/jcr_content/main-pars/image/visual-reverse-image-search-v2_intro.jpg\"\n" +
+//          "}";
+//    }
 
 
 

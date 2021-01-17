@@ -19,5 +19,8 @@ export const ProductsMenu = props => (
     <MenuItem icon="asterisk" to="/product/product2">
       <span>Product2</span>
     </MenuItem>
+    <MenuItem icon="asterisk" to="/product/product-cart">
+      <span>cart</span>
+    </MenuItem>
   </NavDropdown>
 );

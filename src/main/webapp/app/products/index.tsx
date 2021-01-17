@@ -8,13 +8,16 @@ import Entities from "app/entities";
 import {AUTHORITIES} from "app/config/constants";
 import PrivateRoute from "app/shared/auth/private-route";
 import EditorDetail from "app/entities/editor/editor-detail";
+import Cart from "app/products/shopcart/cart";
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 
 const Routes = ({match}) => (
   <div>
       <Switch>
-        <ErrorBoundaryRoute path={`${match.url}/product1`} component={Product1} />
+        {/*<ErrorBoundaryRoute path={`${match.url}/product1`} component={Product1} />*/}
         <ErrorBoundaryRoute path={`${match.url}/product2`} component={Product2} />
+        <PrivateRoute exact path={`${match.url}/product1`}  component={Product1}/>
+        <ErrorBoundaryRoute path={`${match.url}/product-cart`} component={Cart} />
       </Switch>
   </div>
 );
