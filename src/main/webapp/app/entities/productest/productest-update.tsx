@@ -118,15 +118,17 @@ export const ProductestUpdate = (props: IProductestUpdateProps) => {
                 model={contentState}
                 onModelChange={handleModelChange}
                 config={{
-                  imageUploadURL: 'http://localhost:8080/api/images',
+                  imageUploadURL: 'http://localhost:8080/api/fileanhs',
                   imageUploadParam: 'img',
+                  imageUploadParams: {
+                    pikachu: 'pikachi'
+                  },
                   // Allow to upload PNG and JPG.
                   imageAllowedTypes: ['jpeg', 'jpg', 'png', 'gif'],
                   // Set request type.
                   imageUploadMethod: 'POST',
 
                   imageUpload: true,
-
 
                   // imageUploadParams: { Authorization:'Client-ID c166b3ccc22b789' }
 

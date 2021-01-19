@@ -8,6 +8,8 @@ import Message from './message';
 import Editor from './editor';
 import Productest from './productest';
 import Device from './device';
+import Testuuid from './testuuid';
+import ProductId from './product-id';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 const Routes = ({ match }) => (
   <div>
@@ -17,6 +19,8 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}editor`} component={Editor} />
       <ErrorBoundaryRoute path={`${match.url}productest`} component={Productest} />
       <ErrorBoundaryRoute path={`${match.url}device`} component={Device} />
+      <ErrorBoundaryRoute path={`${match.url}testuuid`} component={Testuuid} />
+      <ErrorBoundaryRoute path={`${match.url}product-id`} component={ProductId} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

@@ -53,6 +53,11 @@ public class CacheConfiguration {
             createCache(cm, com.quick.app.domain.Productest.class.getName());
             createCache(cm, com.quick.app.domain.Device.class.getName());
             createCache(cm, com.quick.app.domain.ImageServer.class.getName());
+            createCache(cm, com.quick.app.domain.Serveranh.class.getName());
+            createCache(cm, com.quick.app.domain.Testuuid.class.getName());
+            createCache(cm, com.quick.app.domain.ProductId.class.getName());
+            createCache(cm, com.quick.app.domain.Testimage.class.getName());
+            createCache(cm, com.quick.app.domain.Fileanh.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

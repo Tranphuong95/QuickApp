@@ -130,8 +130,8 @@ public class ProductestResource {
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
 
-//    //todo test upload image since 9/1/2021
-//    @PostMapping("/images")
+////    //todo test upload image since 9/1/2021
+//    @PostMapping("/image-servers")
 //    public String saveImage(@RequestParam MultipartFile img) throws URISyntaxException {
 //        log.debug("REST request to saveImage : {}", img.isEmpty());
 //        try

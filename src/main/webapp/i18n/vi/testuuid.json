@@ -1,0 +1,21 @@
+{
+  "quicklyappApp": {
+    "testuuid": {
+      "home": {
+        "title": "Testuuids",
+        "createLabel": "Thêm mới một Testuuid",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Testuuid",
+        "notFound": "No Testuuids found"
+      },
+      "created": "Một Testuuid mới được tạo với định danh {{ param }}",
+      "updated": "Một Testuuid cập nhật với định danh {{ param }}",
+      "deleted": "Một Testuuid đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Testuuid {{ id }}?"
+      },
+      "detail": {
+        "title": "Testuuid"
+      }
+    }
+  }
+}

@@ -86,6 +86,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/devices").permitAll() //todo test 6/1
             .antMatchers("/api/productests").permitAll() //todo test 7/1
             .antMatchers("/api/product-search").permitAll() //todo test 11/1
+            .antMatchers("/api/image-servers/**").permitAll() //todo test 17/1
+            .antMatchers("/api/serveranhs/**").permitAll() //todo test 18/1
+            .antMatchers("/api/fileanhs/**").permitAll() //todo test 19/1
 //
 //            .antMatchers(HttpMethod.POST).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1
 //            .antMatchers(HttpMethod.PUT).hasAuthority(AuthoritiesConstants.ADMIN)//todo test 9/1

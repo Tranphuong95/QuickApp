@@ -58,7 +58,7 @@ const Header = (props: IHeaderProps) => {
             <Home />
             <ProductsMenu/>
             {/*{props.isAuthenticated && <EntitiesMenu />}*/} {/*todo test block 9/1/2021*/}
-            {props.isAdmin && <EntitiesMenu />} {/*todo test 9/1/2021*/}
+            {props.isAuthenticated && props.isAdmin && (<EntitiesMenu />)} {/*todo test 9/1/2021*/}
             {props.isAuthenticated && props.isAdmin && (
               <AdminMenu showSwagger={props.isSwaggerEnabled} showDatabase={!props.isInProduction} />
             )}

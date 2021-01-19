@@ -1,0 +1,20 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID"
+    }
+  ],
+  "changelogDate": "20210118071636",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "product_id",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

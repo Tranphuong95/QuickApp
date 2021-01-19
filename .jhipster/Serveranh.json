@@ -1,0 +1,25 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "image",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "image"
+    },
+    {
+      "fieldName": "uuid",
+      "fieldType": "UUID"
+    }
+  ],
+  "changelogDate": "20210118041834",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "serveranh",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "no"
+}

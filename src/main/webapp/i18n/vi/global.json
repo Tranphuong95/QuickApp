@@ -11,6 +11,8 @@
         "editor": "Editor",
         "productest": "Productest",
         "device": "Device",
+        "testuuid": "Testuuid",
+        "productId": "Product Id",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
