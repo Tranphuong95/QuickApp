@@ -42,6 +42,12 @@ import productId, {
   ProductIdState
 } from 'app/entities/product-id/product-id.reducer';
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
+//todo test shopcart
+import cartShop, { CartState } from 'app/products/shopcart/reducers/cart.reducers';
+//todo test shopcart
+import orderShop, { OrderState } from 'app/products/shopcart/reducers/order.reducers';
+//todo test shopcart
+import productShop, { ProductState } from 'app/products/shopcart/reducers/products.reducer';
 
 export interface IRootState {
   readonly authentication: AuthenticationState;
@@ -59,6 +65,9 @@ export interface IRootState {
   readonly productest: ProductestState;
   readonly device: DeviceState;
   // readonly cartshop: CartShopState; //todo add 15/1
+  readonly cartShop: CartState;
+  readonly orderShop: OrderState;
+  readonly productShop: ProductState;
   readonly testuuid: TestuuidState;
   readonly productId: ProductIdState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
@@ -81,6 +90,9 @@ const rootReducer = combineReducers<IRootState>({
   productest,
   device,
   // cartshop, //todo add 15/1
+  cartShop, //todo add 22/1
+  orderShop, //todo add 22/1
+  productShop, //todo add 22/1
   testuuid,
   productId,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */

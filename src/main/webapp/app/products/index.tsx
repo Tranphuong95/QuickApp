@@ -18,6 +18,7 @@ const Routes = ({match}) => (
         <ErrorBoundaryRoute path={`${match.url}/product2`} component={Product2} />
         <PrivateRoute exact path={`${match.url}/product1`} component={Product1}/>
         <ErrorBoundaryRoute path={`${match.url}/product-cart`} component={Cart} />
+        {/*<ErrorBoundaryRoute path={`${match.url}/product-cart-content`} component={CartContent} />*/}
       </Switch>
   </div>
 );
