@@ -33,7 +33,7 @@ import {connect} from "react-redux";
 import {IRootState} from "app/shared/reducers";
 import {RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {addToCart} from "app/products/shopcart/actions/cart.action";
+import {addToCart, updateInCart} from "app/products/shopcart/actions/cart.action";
 import {fetchProducts} from "app/products/shopcart/actions/product.action";
 
 // export interface ICartShopProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {};
@@ -74,7 +74,6 @@ export const Cart = (props) => {
   window.console.log(productShops.products)
   window.console.log(cartItems)
   window. console.log(JSON.parse(localStorage.getItem("cartItems")))
-
   const onAddToCart=(product)=>{
     toggle();
     window.console.log(quantity)
@@ -107,6 +106,17 @@ export const Cart = (props) => {
     return result;
     window.console.log(result)
   }
+
+  const onShowTotalProduct=()=>{
+    let total=0;
+    if(cartItems.cartItems && cartItems.cartItems.length>0){
+      cartItems.cartItems.map((item, index)=>{
+        total+=item.count
+      })
+    }
+    return total
+  }
+
   return (
     <div className="shop-modal-content">
       {/*<AvForm inline>*/}
@@ -123,12 +133,12 @@ export const Cart = (props) => {
       {/*</AvForm>*/}
       {showAddToCart()}
       {/*<Modal isOpen={modal} toggle={toggle} className={className}>*/}
-      <Modal isOpen={modal}> {/*todo change 20/1*/}
+      <Modal isOpen={modal} className="cart-modal"> {/*todo change 20/1*/}
         {/*<Button color="danger" onClick={toggle}>ĐĂNG KÝ MUA HÀNG</Button>*/}
-        <ModalHeader toggle={toggle}>Giỏ hàng của bạn ( sản phẩm)</ModalHeader>
+        <ModalHeader toggle={toggle} className="cart-title-content">Giỏ hàng của bạn ({onShowTotalProduct()} sản phẩm)</ModalHeader>
 
         <ModalBody>
-          <CartContent/>
+          <CartContent products={products} cartItems={cartItems}/>
         </ModalBody>
         <ModalFooter>
           <Button color="warning" onClick={toggle}>Tiếp tục mua hàng</Button>{' '}
@@ -145,8 +155,9 @@ const mapStateToProps=({cartShop,productShop}:IRootState)=>{
   }
 }
 const mapDispatchToProps={
-    addToCart,fetchProducts
+    addToCart,fetchProducts, updateInCart
 }
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+

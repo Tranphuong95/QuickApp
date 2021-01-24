@@ -4,65 +4,71 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Table, Label, Input
 import { AvFeedback, AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faTrashAlt, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons'
-import {addToCart} from "app/products/shopcart/actions/cart.action";
+// import { updateInCart} from "app/products/shopcart/actions/cart.action";
 import {IRootState} from "app/shared/reducers";
 import {connect} from "react-redux"
+import {removeFromCart, updateInCart} from "app/products/shopcart/actions/cart.action";
+import {fetchProducts} from "app/products/shopcart/actions/product.action";
+import {Cart} from "app/products/shopcart/cart";
 const CartContent = (props) => {
-  const [quantity, setQuantity] = useState(1);
-  useEffect(()=>{
-    if(quantity>=100){
-      setQuantity(100)
+
+
+  const {products, cartItems}=props;
+
+  const onUpdateInCart=(product, quantity)=>{
+    window.console.log(quantity)
+    if(quantity>0){
+      props.updateInCart(product, quantity)
     }
-    if(!quantity){
-      setQuantity(1)
-    }
-  })
-  const onChangeProductQuantity=(value)=>{
-    setQuantity(value)
   }
-  const onUpdateQuantity=(value)=>{
-    if(quantity>=1 && quantity<=100){
-      setQuantity(Number(quantity)+Number(value))
+  const onRemoveFromCart=(product, quantity)=>{
+    if(quantity>0){
+      props.removeFromCart(product)
     }
+  }
+  const onTotalPrice=()=>{
+    let total=0;
+    if(cartItems.cartItems && cartItems.cartItems.length>0){
+      cartItems.cartItems.map(item=>{
+        total+=item.count*1500000;
+      })
+    }
+    return total
+  }
+  const showCartItems=()=>{
+    let result=null;
+    if(cartItems.cartItems && cartItems.cartItems.length>0){
+      result= cartItems.cartItems.map((item, index)=>{
+        return(
+          <tr key={index*107}>
+            <td scope="row" className="infor-product">
+              <div>
+                <img src="./../../../content/images/thung_go.png"/>
+                <div className="cart-product-content">
+                  <div>{item.product.tensanpham}</div>
+                  <Button color="link" onClick={()=>onRemoveFromCart(item.product,item.count)}><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>
+                </div>
+              </div>
+            </td>
+            <td>1500000 vnd</td>
+            <td>
+              <div className="input-group" key={index*1001}>
+                <Label id="editorLabel" for="editor-editor">
+                </Label>
+                <Button disabled={item.count<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>onUpdateInCart( item.product,item.count- 1)}/></Button>
+                <span>{item.count}</span>
+                <Button disabled={item.count>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>onUpdateInCart(item.product,item.count + 1)}/></Button>
+              </div>
+            </td>
+            <td>{item.count*1500000} vnđ</td>
+          </tr>
+        )
+      })
+    }
+    return result
   }
 
-  //
-  // const {cartItems}=props;
-  // window.console.log(cartItems)
-  //
-  // const showCartItems=()=>{
-  //   let result=null;
-  //   if(cartItems && cartItems.length>0){
-  //     result= cartItems.map((item, index)=>{
-  //       return(
-  //         <tr key={index*107}>
-  //           <td scope="row">
-  //             <div>
-  //               <img src="./../../../content/images/thung_go.png"/>
-  //               <div className="cart-product-content">
-  //                 <div>{item.tensanpham}</div>
-  //                 <Button color="link"><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>
-  //               </div>
-  //             </div>
-  //           </td>
-  //           <td>(price, old price, sell)</td>
-  //           <td>
-  //             <div className="input-group">
-  //               <Label id="editorLabel" for="editor-editor">
-  //               </Label>
-  //               <Button disabled={item.count<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>addToCart( {id:item.id, tensanpham:item.tensanpham},item.count-1)}/></Button>
-  //               {/*<Input  className="btn-product-quantity" type="text" name="product-quantity" value={item.count} onChange={onChangeProductQuantity}/>*/}
-  //               <span>{item.count}</span>
-  //               <Button disabled={item.count>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>addToCart({id: item.id, tensanpham: item.tensanpham}, item.count+1)}/></Button>
-  //             </div>
-  //           </td>
-  //           <td>2000000 vnđ</td>
-  //         </tr>
-  //       )
-  //     })
-  //   }
-  //   return result
-  // }
+
   return (
     <div>
       <Table>
@@ -75,33 +81,38 @@ const CartContent = (props) => {
         </tr>
         </thead>
         <tbody>
-        {/*{showCartItems()}*/}
-        <tr>
-          <td scope="row">
-            <div>
-              <img src="./../../../content/images/thung_go.png"/>
-              <div className="cart-product-content">
-                <div>THÙNG GỖ</div>
-                <Button color="link"><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>
-              </div>
-            </div>
-          </td>
-          <td>(price, old price, sell)</td>
-          <td>
-            <div className="input-group">
-              <Label id="editorLabel" for="editor-editor">
-              </Label>
-              <Button disabled={quantity<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>onUpdateQuantity(-1)}/></Button>
-              <Input  className="btn-product-quantity" type="text" name="product-quantity" onChange={onChangeProductQuantity} value={quantity}/>
-              <Button disabled={quantity>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>onUpdateQuantity(1)}/></Button>
-            </div>
-          </td>
-          <td>2000000 vnđ</td>
-        </tr>
+        {showCartItems()}
+        {/*<tr>*/}
+        {/*  <td scope="row">*/}
+        {/*    <div>*/}
+        {/*      <img src="./../../../content/images/thung_go.png"/>*/}
+        {/*      <div className="cart-product-content">*/}
+        {/*        <div>THÙNG GỖ</div>*/}
+        {/*        <Button color="link"><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>*/}
+        {/*      </div>*/}
+        {/*    </div>*/}
+        {/*  </td>*/}
+        {/*  <td>(price, old price, sell)</td>*/}
+        {/*  <td>*/}
+        {/*    <div className="input-group">*/}
+        {/*      <Label id="editorLabel" for="editor-editor">*/}
+        {/*      </Label>*/}
+        {/*      <Button disabled={quantity<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>updateQuantity(-1)}/></Button>*/}
+        {/*      <Input  className="btn-product-quantity" type="text" name="product-quantity" onChange={onChangeProductQuantity} value={quantity}/>*/}
+        {/*      <Button disabled={quantity>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>updateQuantity(1)}/></Button>*/}
+        {/*    </div>*/}
+        {/*  </td>*/}
+        {/*  <td>2000000 vnđ</td>*/}
+        {/*</tr>*/}
         </tbody>
       </Table>
-      <div className="total-price">Tổng tiền: 2000000 vnđ</div>
+      <div className="total-price">Tổng tiền: {onTotalPrice()} vnđ</div>
     </div>
   );
 }
-export default CartContent;
+// export default CartContent;
+const mapDispatchToProps={
+  updateInCart, removeFromCart
+}
+type DispatchProps = typeof mapDispatchToProps;
+export default connect(null, mapDispatchToProps)(CartContent)

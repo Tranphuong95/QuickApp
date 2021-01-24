@@ -2,7 +2,7 @@ import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART } from 'app/products/shop
 
 export const addToCart = (product, quantity) => (dispatch, getState) => {
   window.console.log('add gan thanh cong');
-  window.console.log(getState().cartShop.cartItems.slice());
+  window.console.log(getState().cartShop);
   const cartItems = getState().cartShop.cartItems.slice();
   window.console.log('add chua thanh cong');
   window.console.log(cartItems);
@@ -24,17 +24,36 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
 };
 
-export const updateInCart = () => {
-  //da dua len addTocart
+export const updateInCart = (product, quantity) => (dispatch, getState) => {
+  window.console.log('update chua thanh cong');
+  const cartItems = getState().cartShop.cartItems.slice();
+  window.console.log(product.id);
+  cartItems.forEach(x => {
+    window.console.log(x.product.id === product.id);
+    if (x.product.id === product.id) {
+      x.count = quantity;
+    }
+  });
+  window.console.log('so sanh id');
+  dispatch({
+    type: UPDATE_IN_CART,
+    payload: { cartItems },
+  });
+  window.console.log('dispatch thanh cong');
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  window.console.log('set thanh cong');
 };
 
-export const removeFromCart = product => (dispatch, getState) => {
+export const removeFromCart = product => (dispatch, getState, filter) => {
+  window.console.log('chuan bi xoa');
   const cartItems = getState()
-    .cart.cartItems.slice()
-    .filter(x => x._id !== product.id);
+    .cartShop.cartItems.slice()
+    .filter(x => x.product.id !== product.id);
+  window.console.log('chuan bi dispatch');
   dispatch({
     type: REMOVE_FROM_CART,
     payload: { cartItems },
   });
-  localStorage.setItem('cartItem', JSON.stringify(cartItems));
+  localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  window.console.log('set xong remove');
 };
