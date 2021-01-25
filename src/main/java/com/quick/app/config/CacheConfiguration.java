@@ -58,6 +58,7 @@ public class CacheConfiguration {
             createCache(cm, com.quick.app.domain.ProductId.class.getName());
             createCache(cm, com.quick.app.domain.Testimage.class.getName());
             createCache(cm, com.quick.app.domain.Fileanh.class.getName());
+            createCache(cm, com.quick.app.domain.Imagex.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,11 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-// const Product1=()=>{
-//
-//   return(
-//     <div>Hello Product1</div>
-//   )
-// }
-// export default Product1
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -14,32 +6,31 @@ import { Translate, ICrudGetAllAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getEntities } from './../../entities/editor/editor.reducer';
-import { IEditor } from 'app/shared/model/editor.model';
+import { getEntities } from './../../entities/productest/productest.reducer';
+import { IProductest } from 'app/shared/model/productest.model';
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
-import draftToHtml from 'draftjs-to-html';
 
-export interface IEditorProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 
-export const Product1 = (props: IEditorProps) => {
+export interface IProductestProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+
+export const Productest = (props: IProductestProps) => {
   useEffect(() => {
     props.getEntities();
   }, []);
-
-
-  const { editorList, match, loading } = props;
+  const { productestList, match, loading } = props;
   return (
     <div>
-      <h2 id="editor-heading">
-        <Translate contentKey="quicklyappApp.editor.home.title">Editors</Translate>
-        {/*<Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">*/}
-        {/*  <FontAwesomeIcon icon="plus" />*/}
-        {/*  &nbsp;*/}
-        {/*  <Translate contentKey="quicklyappApp.editor.home.createLabel">Create new Editor</Translate>*/}
-        {/*</Link>*/}
+      <h2 id="productest-heading">
+        <Translate contentKey="quicklyappApp.productest.home.title">Productests</Translate>
+        <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+          <FontAwesomeIcon icon="plus" />
+          &nbsp;
+          <Translate contentKey="quicklyappApp.productest.home.createLabel">Create new Productest</Translate>
+        </Link>
       </h2>
       <div className="table-responsive">
-        {editorList && editorList.length > 0 ? (
+        {productestList && productestList.length > 0 ? (
           <Table responsive>
             <thead>
             <tr>
@@ -47,42 +38,48 @@ export const Product1 = (props: IEditorProps) => {
                 <Translate contentKey="global.field.id">ID</Translate>
               </th>
               <th>
-                <Translate contentKey="quicklyappApp.editor.editor">Editor</Translate>
+                <Translate contentKey="quicklyappApp.productest.tensanpham">Tensanpham</Translate>
               </th>
               <th />
             </tr>
             </thead>
             <tbody>
-            {editorList.map((editor, i) => (
+            {productestList.map((productest, i) => (
               <tr key={`entity-${i}`}>
                 <td>
-                  <Button tag={Link} to={`${match.url}/${editor.id}`} color="link" size="sm">
-                    {editor.id}
+                  <Button tag={Link} to={`${match.url}/${productest.id}`} color="link" size="sm">
+                    {productest.id}
                   </Button>
                 </td>
-                <td dangerouslySetInnerHTML={{__html: draftToHtml(JSON.parse(editor.editor))}}></td>
-                {/*<td className="text-right">*/}
-                {/*  <div className="btn-group flex-btn-group-container">*/}
-                {/*    <Button tag={Link} to={`${match.url}/${editor.id}`} color="info" size="sm">*/}
-                {/*      <FontAwesomeIcon icon="eye" />{' '}*/}
-                {/*      <span className="d-none d-md-inline">*/}
-                {/*          <Translate contentKey="entity.action.view">View</Translate>*/}
-                {/*        </span>*/}
-                {/*    </Button>*/}
-                {/*    <Button tag={Link} to={`${match.url}/${editor.id}/edit`} color="primary" size="sm">*/}
-                {/*      <FontAwesomeIcon icon="pencil-alt" />{' '}*/}
-                {/*      <span className="d-none d-md-inline">*/}
-                {/*          <Translate contentKey="entity.action.edit">Edit</Translate>*/}
-                {/*        </span>*/}
-                {/*    </Button>*/}
-                {/*    <Button tag={Link} to={`${match.url}/${editor.id}/delete`} color="danger" size="sm">*/}
-                {/*      <FontAwesomeIcon icon="trash" />{' '}*/}
-                {/*      <span className="d-none d-md-inline">*/}
-                {/*          <Translate contentKey="entity.action.delete">Delete</Translate>*/}
-                {/*        </span>*/}
-                {/*    </Button>*/}
-                {/*  </div>*/}
-                {/*</td>*/}
+                {/*<td>{productest.tensanpham}</td>*/}
+                {/*<td dangerouslySetInnerHTML={{__html: productest.tensanpham}}></td>*/}
+                <td>
+                  <FroalaEditorView
+                    model={productest.tensanpham}
+                  />
+                </td>
+                <td className="text-right">
+                  <div className="btn-group flex-btn-group-container">
+                    <Button tag={Link} to={`${match.url}/${productest.id}`} color="info" size="sm">
+                      <FontAwesomeIcon icon="eye" />{' '}
+                      <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
+                    </Button>
+                    <Button tag={Link} to={`${match.url}/${productest.id}/edit`} color="primary" size="sm">
+                      <FontAwesomeIcon icon="pencil-alt" />{' '}
+                      <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
+                    </Button>
+                    <Button tag={Link} to={`${match.url}/${productest.id}/delete`} color="danger" size="sm">
+                      <FontAwesomeIcon icon="trash" />{' '}
+                      <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
+                    </Button>
+                  </div>
+                </td>
               </tr>
             ))}
             </tbody>
@@ -90,19 +87,18 @@ export const Product1 = (props: IEditorProps) => {
         ) : (
           !loading && (
             <div className="alert alert-warning">
-              <Translate contentKey="quicklyappApp.editor.home.notFound">No Editors found</Translate>
+              <Translate contentKey="quicklyappApp.productest.home.notFound">No Productests found</Translate>
             </div>
           )
         )}
       </div>
     </div>
   );
-
 };
 
-const mapStateToProps = ({ editor }: IRootState) => ({
-  editorList: editor.entities,
-  loading: editor.loading,
+const mapStateToProps = ({ productest }: IRootState) => ({
+  productestList: productest.entities,
+  loading: productest.loading,
 });
 
 const mapDispatchToProps = {
@@ -112,4 +108,4 @@ const mapDispatchToProps = {
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;
 
-export default connect(mapStateToProps, mapDispatchToProps)(Product1);
+export default connect(mapStateToProps, mapDispatchToProps)(Productest);

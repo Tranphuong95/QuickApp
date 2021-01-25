@@ -11,6 +11,7 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
     if (x.product.id === product.id) {
       alreadyExist = true;
       x.count += quantity;
+      x.product.tensanpham = product.tensanpham; //todo add 25/1
     }
   });
   if (!alreadyExist) {
@@ -25,7 +26,7 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
 };
 
 export const updateInCart = (product, quantity) => (dispatch, getState) => {
-  window.console.log('update chua thanh cong');
+  window.console.log(product.tensanpham);
   const cartItems = getState().cartShop.cartItems.slice();
   window.console.log(product.id);
   cartItems.forEach(x => {

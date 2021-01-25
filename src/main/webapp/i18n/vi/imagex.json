@@ -1,0 +1,22 @@
+{
+  "quicklyappApp": {
+    "imagex": {
+      "home": {
+        "title": "Imagexes",
+        "createLabel": "Thêm mới một Imagex",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Imagex",
+        "notFound": "No Imagexes found"
+      },
+      "created": "Một Imagex mới được tạo với định danh {{ param }}",
+      "updated": "Một Imagex cập nhật với định danh {{ param }}",
+      "deleted": "Một Imagex đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Imagex {{ id }}?"
+      },
+      "detail": {
+        "title": "Imagex"
+      },
+      "image": "Image"
+    }
+  }
+}

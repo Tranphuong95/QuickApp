@@ -13,6 +13,7 @@
         "device": "Device",
         "testuuid": "Testuuid",
         "productId": "Product Id",
+        "imagex": "Imagex",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
