@@ -220,12 +220,7 @@ export const Cart = (props) => {
   const onChangeProductQuantity=(event)=>{
     setQuantity(event.target.value)
   }
-  // const onUpQuantity=()=>{
-  //   if(quantity<100){setQuantity(Number(quantity)+Number(1))}
-  // }
-  // const onDownQuantity=()=>{
-  //   if(quantity>1) {setQuantity(Number(quantity)-Number(1))}
-  // }
+
   const onChangeQuantity=(value)=>{
     setQuantity(Number(quantity)+Number(value))
   }
@@ -243,43 +238,16 @@ export const Cart = (props) => {
   window.console.log(productShops.products)
   window.console.log(cartItems)
   window. console.log(JSON.parse(localStorage.getItem("cartItems")))
-  const onAddToCart=(product)=>{
+  const onAddToCart=()=>{
     toggle();
-    window.console.log(quantity)
-    props.addToCart(product, quantity)
+    props.addToCart(productestEntity, quantity)
   }
 
-  // const showAddToCart=()=>{
-  //   let result=null;
-  //   if(productShops && productShops.products.length>0){
-  //     result=productShops.products.map((product, index)=>{
-  //       return(
-  //         <div key={index*101}>
-  //           <div>{product.tensanpham}</div>
-  //           <AvForm inline key={index*101}>
-  //             <AvGroup inline>
-  //               <Label id="editorLabel" for="editor-editor">
-  //                 <span>Số lượng</span>
-  //               </Label>
-  //               <Button disabled={quantity<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>onChangeQuantity(-1)}/></Button>
-  //               <AvField id={`product-quantity${index}`} className="btn-product-quantity" type="text" name="quantity" onChange={onChangeProductQuantity} value={quantity}/>
-  //               <Button disabled={quantity>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>onChangeQuantity(1)}/></Button>
-  //             </AvGroup>
-  //             {/*<Button>Đăng Ký mua hàng</Button>*/}
-  //             <Button className="add-to-cart" type="submit" color="danger"onClick={()=>onAddToCart(product)} >ĐĂNG KÝ MUA HÀNG</Button>
-  //           </AvForm>
-  //         </div>
-  //       )
-  //     })
-  //   }
-  //   return result;
-  //   window.console.log(result)
-  // }
 
   const onShowTotalProduct=()=>{
     let total=0;
     if(cartItems.cartItems && cartItems.cartItems.length>0){
-      cartItems.cartItems.map((item, index)=>{
+      cartItems.cartItems.map((item)=>{
         total+=item.count
       })
     }
@@ -288,7 +256,7 @@ export const Cart = (props) => {
   const showId=()=>{
     let id=null;
     if(cartItems.cartItems && cartItems.cartItems.length>0){
-      id=cartItems.cartItems.map((item, index)=>{
+      id=cartItems.cartItems.map((item)=>{
         item.product.id
       })
     }
@@ -296,19 +264,6 @@ export const Cart = (props) => {
   }
   return (
     <div className="shop-modal-content">
-      {/*<AvForm inline>*/}
-      {/*  <AvGroup inline>*/}
-      {/*    <Label id="editorLabel" for="editor-editor">*/}
-      {/*      <span>Số lượng</span>*/}
-      {/*    </Label>*/}
-      {/*    <Button disabled={quantity<=1}color="link"><FontAwesomeIcon icon={faMinus} onClick={()=>onChangeQuantity(-1)}/></Button>*/}
-      {/*    <AvField id="cart-product-quantity" className="btn-product-quantity" type="text" name="quantity" onChange={onChangeProductQuantity} value={quantity}/>*/}
-      {/*    <Button disabled={quantity>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>onChangeQuantity(1)}/></Button>*/}
-      {/*  </AvGroup>*/}
-      {/*  /!*<Button>Đăng Ký mua hàng</Button>*!/*/}
-      {/*  <Button className="add-to-cart" color="danger"onClick={()=>onAddToCart(quantity)} >ĐĂNG KÝ MUA HÀNG</Button>*/}
-      {/*</AvForm>*/}
-      {/*{showAddToCart()}*/}
       <AvForm inline>
         <AvGroup inline>
           <Label id="editorLabel" for="editor-editor">
@@ -319,7 +274,7 @@ export const Cart = (props) => {
           <Button disabled={quantity>=100}color="link"><FontAwesomeIcon icon={faPlus} onClick={()=>onChangeQuantity(1)}/></Button>
         </AvGroup>
         {/*<Button>Đăng Ký mua hàng</Button>*/}
-        <Button className="add-to-cart" type="submit" color="danger"onClick={()=>onAddToCart(productestEntity)} >ĐĂNG KÝ MUA HÀNG</Button>
+        <Button className="add-to-cart" type="submit" color="danger"onClick={onAddToCart} >ĐĂNG KÝ MUA HÀNG</Button>
       </AvForm>
       {/*<Modal isOpen={modal} toggle={toggle} className={className}>*/}
       <Modal isOpen={modal} className="cart-modal"> {/*todo change 20/1*/}
@@ -327,7 +282,7 @@ export const Cart = (props) => {
         <ModalHeader toggle={toggle} className="cart-title-content">Giỏ hàng của bạn ({onShowTotalProduct()} sản phẩm)</ModalHeader>
 
         <ModalBody>
-          <CartContent products={products} cartItems={cartItems}/>
+          <CartContent  cartItems={cartItems}/>
         </ModalBody>
         <ModalFooter>
           <Button color="warning" onClick={toggle}>Tiếp tục mua hàng</Button>{' '}

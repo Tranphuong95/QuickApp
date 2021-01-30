@@ -49,6 +49,15 @@ export const Products = props => (
     </NavLink>
   </NavItem>
 );
+export const CheckoutCart = props => (
+  <NavItem>
+    <NavLink tag={Link} to="/checkout" className="d-flex align-items-center">
+      <span>
+        Checkout
+      </span>
+    </NavLink>
+  </NavItem>
+);
 export const FilterSearch = props =>{
   const [filters, setFilters]=useState({keyword:''});
   const [postFilter, setPostFilter]=useState([]);

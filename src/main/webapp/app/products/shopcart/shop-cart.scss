@@ -13,6 +13,9 @@
       width: 900px !important;
       max-height: 720px !important;
       overflow-y: auto;
+      .fr-view p {
+        word-break: break-all;
+      }
       .cart-title-content {
         border-bottom: none;
         .modal-title {
@@ -42,6 +45,10 @@
           tbody tr {
             .infor-product {
               max-width: 350px;
+              a:hover {
+                text-decoration: none;
+                color: #007bff;
+              }
               div {
                 display: flex;
                 img {

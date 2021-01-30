@@ -15,8 +15,8 @@ import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Products from "app/products";
-import Product2 from "app/products/product2/product2";
-import {Product1} from "app/products/product1/product1";
+import CheckoutCart from "app/checkout-cart/checkout-cart";
+
 
 const Account = Loadable({
   loader: () => import(/* webpackChunkName: "account" */ 'app/modules/account'),
@@ -41,6 +41,7 @@ const Routes = () => (
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
       <ErrorBoundaryRoute path="/" exact component={Home} />
       <ErrorBoundaryRoute path="/product" component={Products}/>
+      <ErrorBoundaryRoute path="/checkout" component={CheckoutCart}/>
       <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>

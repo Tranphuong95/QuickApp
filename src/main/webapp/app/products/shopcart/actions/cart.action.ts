@@ -1,5 +1,6 @@
 import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART } from 'app/products/shopcart/actions/types';
 
+//todo kiem tra xem product co chua du lieu (khac null) moi set vao CartItems
 export const addToCart = (product, quantity) => (dispatch, getState) => {
   window.console.log('add gan thanh cong');
   window.console.log(getState().cartShop);

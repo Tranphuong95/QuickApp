@@ -9,7 +9,7 @@ import { NavLink as Link } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading-bar';
 
 // import {Home, Brand, Products, FilterSearch} from './header-components';
-import {Home, Brand, FilterSearch} from './header-components';
+import {Home, Brand, FilterSearch, CheckoutCart} from './header-components';
 
 import { AdminMenu, EntitiesMenu, AccountMenu, LocaleMenu,ProductsMenu } from '../menus';
 
@@ -28,6 +28,7 @@ const Header = (props: IHeaderProps) => {
 
   const handleLocaleChange = event => {
     const langKey = event.target.value;
+    window.console.log(langKey)
     Storage.session.set('locale', langKey);
     props.onLocaleChange(langKey);
   };
@@ -57,6 +58,7 @@ const Header = (props: IHeaderProps) => {
           <Nav id="header-tabs" className="ml-auto" navbar>
             <Home />
             <ProductsMenu/>
+            <CheckoutCart/>
             {/*{props.isAuthenticated && <EntitiesMenu />}*/} {/*todo test block 9/1/2021*/}
             {props.isAuthenticated && props.isAdmin && (<EntitiesMenu />)} {/*todo test 9/1/2021*/}
             {props.isAuthenticated && props.isAdmin && (

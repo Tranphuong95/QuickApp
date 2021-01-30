@@ -7,8 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
 import { getEntities } from './../../entities/productest/productest.reducer';
-import { IProductest } from 'app/shared/model/productest.model';
-import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+
 
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 

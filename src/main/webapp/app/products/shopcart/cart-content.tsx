@@ -128,14 +128,13 @@ import {faTrashAlt, faMinus, faPlus} from '@fortawesome/free-solid-svg-icons'
 import {IRootState} from "app/shared/reducers";
 import {connect} from "react-redux"
 import {removeFromCart, updateInCart} from "app/products/shopcart/actions/cart.action";
-import {fetchProducts} from "app/products/shopcart/actions/product.action";
-import {Cart} from "app/products/shopcart/cart";
+import {Link} from "react-router-dom";
 import FroalaEditorView from 'react-froala-wysiwyg/FroalaEditorView';
 
 const CartContent = (props) => {
 
 
-  const {products, cartItems}=props;
+  const {cartItems}=props;
 
   const onUpdateInCart=(product, quantity)=>{
     window.console.log(quantity)
@@ -165,14 +164,19 @@ const CartContent = (props) => {
           <tr key={index*107}>
             <td scope="row" className="infor-product">
               <div>
-                <img src="./../../../content/images/thung_go.png"/>
-                <div className="cart-product-content">
-                  {/*<div>{item.product.tensanpham}</div>*/}
-                  <FroalaEditorView
-                    model={item.product.tensanpham}
-                  />
-                  <Button color="link" onClick={()=>onRemoveFromCart(item.product,item.count)}><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>
-                </div>
+                <Link to={`/product/product1/${item.product.id}`} target="_blank">
+                  <img src="./../../../content/images/thung_go.png"/>
+                </Link>
+                  <div className="cart-product-content">
+                    {/*<div>{item.product.tensanpham}</div>*/}
+                    <Link to={`/product/product1/${item.product.id}`} target="_blank">
+                      <FroalaEditorView
+                        model={item.product.tensanpham}
+                      />
+                    </Link>
+                    <Button color="link" onClick={()=>onRemoveFromCart(item.product,item.count)}><FontAwesomeIcon icon={faTrashAlt} size="1x"/>Xóa sản phẩm</Button>
+                  </div>
+
               </div>
             </td>
             <td>1500000 vnd</td>
