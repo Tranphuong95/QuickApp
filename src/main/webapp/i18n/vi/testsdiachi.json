@@ -1,0 +1,27 @@
+{
+  "quicklyappApp": {
+    "testsdiachi": {
+      "home": {
+        "title": "Testsdiachis",
+        "createLabel": "Thêm mới một Testsdiachi",
+        "createOrEditLabel": "Thêm mới hoặc cập nhật Testsdiachi",
+        "notFound": "No Testsdiachis found"
+      },
+      "created": "Một Testsdiachi mới được tạo với định danh {{ param }}",
+      "updated": "Một Testsdiachi cập nhật với định danh {{ param }}",
+      "deleted": "Một Testsdiachi đã xóa với định danh {{ param }}",
+      "delete": {
+        "question": "Bạn có chắc là muốn xóa Testsdiachi {{ id }}?"
+      },
+      "detail": {
+        "title": "Testsdiachi"
+      },
+      "tinh": "Tinh",
+      "matinh": "Matinh",
+      "quanhuyen": "Quanhuyen",
+      "maquanhuyen": "Maquanhuyen",
+      "phuongxa": "Phuongxa",
+      "maphuongxa": "Maphuongxa"
+    }
+  }
+}

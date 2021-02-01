@@ -11,6 +11,7 @@ import Device from './device';
 import Testuuid from './testuuid';
 import ProductId from './product-id';
 import Imagex from './imagex';
+import Testsdiachi from './testsdiachi';
 /* jhipster-needle-add-route-import - JHipster will add routes here */
 const Routes = ({ match }) => (
   <div>
@@ -23,6 +24,7 @@ const Routes = ({ match }) => (
       <ErrorBoundaryRoute path={`${match.url}testuuid`} component={Testuuid} />
       <ErrorBoundaryRoute path={`${match.url}product-id`} component={ProductId} />
       <ErrorBoundaryRoute path={`${match.url}imagex`} component={Imagex} />
+      <ErrorBoundaryRoute path={`${match.url}testsdiachi`} component={Testsdiachi} />
       {/* jhipster-needle-add-route-path - JHipster will add routes here */}
     </Switch>
   </div>

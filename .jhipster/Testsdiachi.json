@@ -1,0 +1,40 @@
+{
+  "fluentMethods": true,
+  "clientRootFolder": "",
+  "relationships": [],
+  "fields": [
+    {
+      "fieldName": "tinh",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "matinh",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "quanhuyen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maquanhuyen",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "phuongxa",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "maphuongxa",
+      "fieldType": "Long"
+    }
+  ],
+  "changelogDate": "20210130101314",
+  "dto": "no",
+  "searchEngine": false,
+  "service": "no",
+  "entityTableName": "testsdiachi",
+  "databaseType": "sql",
+  "readOnly": false,
+  "jpaMetamodelFiltering": false,
+  "pagination": "pagination"
+}

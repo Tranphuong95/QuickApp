@@ -14,6 +14,8 @@
         "testuuid": "Testuuid",
         "productId": "Product Id",
         "imagex": "Imagex",
+        "testdiachi": "Testdiachi",
+        "testsdiachi": "Testsdiachi",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

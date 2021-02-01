@@ -1,0 +1,90 @@
+.checkout-custom {
+  position: relative;
+  margin: 20px auto;
+  form {
+    .checkout-information {
+      display: flex;
+      .infor-customer {
+        .title {
+          margin: 0;
+          border: 1px solid #eee;
+          border-bottom: none;
+          background: #f7f7f7;
+          padding: 5px 15px;
+          font-size: 20px;
+        }
+        .infor-content {
+          border: 1px solid #eee;
+          padding: 20px 20px 0 20px;
+          .checkout-group {
+            display: flex;
+            .left {
+              justify-content: flex-start;
+              width: 70px;
+            }
+            .right {
+              justify-content: flex-end;
+            }
+          }
+        }
+        .btn-right {
+          position: relative;
+          .btn-checkout {
+            background: red;
+            width: 120px;
+            position: absolute;
+            right: 0;
+          }
+          .btn-checkout::after {
+            content: '';
+            display: block;
+            position: absolute;
+            width: 12px;
+            height: 8px;
+            background: url('./../../content/images/spritesheet.png') -264px -81px no-repeat;
+            top: 16px;
+            right: 10px;
+          }
+        }
+      }
+      .product-customer {
+        .title {
+          margin: 0;
+          border: 1px solid #eee;
+          border-bottom: none;
+          background: #f7f7f7;
+          padding: 5px 15px;
+        }
+        .infor-content {
+          border: 1px solid #eee;
+          padding: 20px 0 0 20px;
+          .content-product {
+            overflow: auto;
+            max-height: 400px;
+            .product {
+              display: flex;
+              justify-content: space-between;
+              font-size: 15px;
+              div {
+                padding: 5px;
+              }
+              .image {
+                max-width: 100px;
+                height: auto;
+                img {
+                  width: 100%;
+                }
+              }
+              .price {
+                font-family: 'Times New Roman';
+              }
+            }
+          }
+          .total-price {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
