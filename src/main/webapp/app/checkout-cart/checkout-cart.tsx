@@ -6,6 +6,9 @@ import axios from 'axios';
 import {Redirect} from 'react-router-dom'
 import VerifieOrder from "app/checkout-cart/verifie-order";
 
+import { Base64 } from 'js-base64';
+import { encode, decode } from 'js-base64';
+
 const CartItems = JSON.parse(localStorage.getItem("cartItems"));
 const totalProduct=()=>{
   let total=0;
@@ -70,7 +73,8 @@ const CheckoutCart=()=>
     districtName:'',
     address:'',
     message:'',
-    product: CartItems
+    product: CartItems,
+    totalPrice: totalPrice()
   });
   useEffect(() => {
     axios({
@@ -128,26 +132,36 @@ const CheckoutCart=()=>
   // }
   // window.console.log(CartItems.length)
 
-  const onSubmit=(event)=>{ //todo block 3/2/2021 thay bang set cookie
-    event.preventDefault()
-    window.console.log(informationProducts)
-    if(CartItems && CartItems.length>0){
-      axios({
-        method: "post",
-        url: "http://localhost:4001/informationProducts",
-        data: informationProducts
-      })
-        .then(res =>{
-          setStatusApi(res.statusText)
-        })
-        .catch(error => (window.console.log(error)))
-      }
-    else
-    {
-      return (alert("Vui lòng đăng ký mua sản phẩm"))
-    }
-  }
+  // const onSubmit=(event)=>{ //todo block 3/2/2021 thay bang set cookie
+  //   event.preventDefault()
+  //   window.console.log(informationProducts)
+  //   if(CartItems && CartItems.length>0){
+  //     axios({
+  //       method: "post",
+  //       url: "http://localhost:4001/informationProducts",
+  //       data: informationProducts
+  //     })
+  //       .then(res =>{
+  //         setStatusApi(res.statusText)
+  //       })
+  //       .catch(error => (window.console.log(error)))
+  //     }
+  //   else
+  //   {
+  //     return (alert("Vui lòng đăng ký mua sản phẩm"))
+  //   }
+  // }
 
+  //todo tao cookie
+  const setCookie=(cname, cvalue, exdays)=>{
+    const d= new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    const expires= "expires" +d.toUTCString();
+    document.cookie= cname + "=" + cvalue + ";" + expires + "; path=/"
+  }
+  const onSubmit=()=>{
+    setCookie("_cart", Base64.encode(encodeURIComponent(JSON.stringify(informationProducts))), 30)
+  }
 
   window.console.log(informationProducts)
   window.console.log(statusApi)

@@ -141,11 +141,27 @@
 //complete order
 .complete-order {
   display: flex;
+  header h3 {
+    border: 1px solid green;
+    background-color: #f7f7f7;
+    border-radius: 25px;
+    padding: 10px 15px;
+    color: green;
+    text-align: center;
+  }
   .infor-connect {
+    .notify {
+      margin: 30px 0;
+      span {
+        color: #007bff;
+        font-weight: bold;
+      }
+    }
     .title {
       border: 1px solid #eee;
       background-color: #f7f7f7;
       margin: 0;
+      padding: 0 15px;
     }
     .infor {
       div {
