@@ -16,6 +16,7 @@ import PageNotFound from 'app/shared/error/page-not-found';
 import { AUTHORITIES } from 'app/config/constants';
 import Products from "app/products";
 import CheckoutCart from "app/checkout-cart/checkout-cart";
+import CompleteOrder from "app/checkout-cart/complete-order";
 
 
 const Account = Loadable({
@@ -42,6 +43,7 @@ const Routes = () => (
       <ErrorBoundaryRoute path="/" exact component={Home} />
       <ErrorBoundaryRoute path="/product" component={Products}/>
       <ErrorBoundaryRoute path="/checkout" component={CheckoutCart}/>
+      <ErrorBoundaryRoute path="/hoantatgiaohang" component={CompleteOrder} /> //todo add 2/2
       <PrivateRoute path="/" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <ErrorBoundaryRoute component={PageNotFound} />
     </Switch>
