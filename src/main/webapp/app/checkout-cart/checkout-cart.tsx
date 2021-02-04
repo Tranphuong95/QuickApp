@@ -3,78 +3,44 @@ import React,{useState, useEffect}from 'react';
 import {AvForm} from 'availity-reactstrap-validation'
 import {Form, Input, Button, FormGroup, Label,FormFeedback, FormText} from 'reactstrap';
 import axios from 'axios';
-import {Redirect} from 'react-router-dom'
+import {Redirect} from 'react-router-dom';
 import VerifieOrder from "app/checkout-cart/verifie-order";
 
 import { Base64 } from 'js-base64';
-import { encode, decode } from 'js-base64';
+import {deleteCart} from "app/products/shopcart/actions/cart.action";
+import {connect} from "react-redux";
 
-const CartItems = JSON.parse(localStorage.getItem("cartItems"));
-const totalProduct=()=>{
-  let total=0;
-  if(CartItems && CartItems.length>0){
-    CartItems.map(item=>{
-      total+=item.count;
-    })
-  }
-  return total
-}
-
-const totalPrice=()=>{
-  let total=0;
-  if(CartItems && CartItems.length>0){
-    CartItems.map(item=>{
-      total+=item.count*1500000;
-    })
-  }
-  return total
-}
-export const ProductInfor=()=>{
-  return(
-    <div className="product-customer col-4">
-      <div className="title"><h5>Đơn hàng ({totalProduct()} sản phẩm)</h5></div>
-      <div className="infor-content">
-        <div className="content-product">
-          {CartItems && CartItems.length>0?CartItems.map((item, index)=>{
-            return(
-              <div className="product" key={index*11011}>
-                <div className="image col-4"><img src="/api/fileanhs/do_go_san_pham_1c&f02862f8-b054-44f2-9054-b2187d59b970.png"/></div>
-                <div className="title-product col-4">{item.product.tensanpham}</div>
-                <div className="price col-4">
-                  <div className="tt-price">{Number(1500000).toLocaleString()}₫</div>
-                  <div className="quantity">x{item.count}</div>
-                  <div className="tt-price"><strong>{(item.count*1500000).toLocaleString()}₫</strong></div>
-                </div>
-              </div>
-            )}):(<strong>Bạn chưa đăng ký mua sản phẩm nào</strong>)}
-        </div>
-        <div className="total-price">
-          <div>Tổng tiền: <strong>{totalPrice().toLocaleString()}đ</strong></div>
-          <div>Cước vận chuyển</div>
-          <div>Số tiền cần thanh toán:<strong>{totalPrice().toLocaleString()}đ</strong></div>
-        </div>
-      </div>
-    </div>
-  )
-}
-const CheckoutCart=()=>
+const CheckoutCart=(props)=>
 {
   const [testsdiachiList, setTestsdiachiList]=useState([]);
   const [testsTenQuan, setTestsTenQuan]=useState([]);
   const [statusApi, setStatusApi]=useState('')
-
+  const [CartItems, setCartItems]=useState([])
+  const [provinceNames, setProvinceNames]=useState('')
+  const cart: any= localStorage.getItem("cartItems")
+  useEffect(()=>{
+    setCartItems(JSON.parse(cart))
+  },[cart])
   // const CartItems = JSON.parse(localStorage.getItem("cartItems"));
-
+  const totalPrice=()=>{
+    let total=0;
+    if(CartItems && CartItems.length>0){
+      CartItems.map(item=>{
+        total+=item.count*1500000;
+      })
+    }
+    return total
+  }
   const [informationProducts, setInformationProducts]=useState({
     name:'',
     phoneNumber:'',
     email:'',
-    provinceName:'',
     districtName:'',
     address:'',
     message:'',
     product: CartItems,
-    totalPrice: totalPrice()
+    totalPrice: totalPrice(),
+    provinceName: ''
   });
   useEffect(() => {
     axios({
@@ -84,13 +50,61 @@ const CheckoutCart=()=>
     })
       .then(response=>setTestsdiachiList(response.data.data))
   }, []);
+
+  const totalProduct=()=>{
+    let total=0;
+    if(CartItems && CartItems.length>0){
+      CartItems.map(item=>{
+        total+=item.count;
+      })
+    }
+    return total
+  }
+
+  const ProductInfor=()=>{
+    return(
+      <div className="product-customer col-4">
+        <div className="title"><h5>Đơn hàng ({totalProduct()} sản phẩm)</h5></div>
+        <div className="infor-content">
+          <div className="content-product">
+            {CartItems && CartItems.length>0?CartItems.map((item, index)=>{
+              return(
+                <div className="product" key={index*11011}>
+                  <div className="image col-4"><img src="/api/fileanhs/do_go_san_pham_1c&f02862f8-b054-44f2-9054-b2187d59b970.png"/></div>
+                  <div className="title-product col-4">{item.product.tensanpham}</div>
+                  <div className="price col-4">
+                    <div className="tt-price">{Number(1500000).toLocaleString()}₫</div>
+                    <div className="quantity">x{item.count}</div>
+                    <div className="tt-price"><strong>{(item.count*1500000).toLocaleString()}₫</strong></div>
+                  </div>
+                </div>
+              )}):(<strong>Bạn chưa đăng ký mua sản phẩm nào</strong>)}
+          </div>
+          <div className="total-price">
+            <div>Tổng tiền: <strong>{totalPrice().toLocaleString()}đ</strong></div>
+            <div>Cước vận chuyển</div>
+            <div>Số tiền cần thanh toán:<strong>{totalPrice().toLocaleString()}đ</strong></div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const showProvinceName=(event)=>{
+    const province=event.target.options[event.target.selectedIndex].text;
+    setProvinceNames(province)
+  }
+
   const onHandleChange=(event)=>{
     setInformationProducts({
       ...informationProducts,
-      [event.target.name]:event.target.value
+      [event.target.name]: event.target.value,
+      product: CartItems,
+      totalPrice: totalPrice(),
+      provinceName: provinceNames,
     })
   }
-
+  window.console.log(provinceNames)
   const FindProvinceId=(event)=>{
     window.console.log(event.target.value)
     axios({
@@ -105,7 +119,8 @@ const CheckoutCart=()=>
       }
     })
       .then(response=>setTestsTenQuan(response.data.data));
-    onHandleChange(event)
+    // onHandleChange(event)
+    showProvinceName(event)
 
   }
 
@@ -152,6 +167,7 @@ const CheckoutCart=()=>
   //   }
   // }
 
+
   //todo tao cookie
   const setCookie=(cname, cvalue, exdays)=>{
     const d= new Date();
@@ -159,19 +175,46 @@ const CheckoutCart=()=>
     const expires= "expires" +d.toUTCString();
     document.cookie= cname + "=" + cvalue + ";" + expires + "; path=/"
   }
-  const onSubmit=()=>{
-    setCookie("_cart", Base64.encode(encodeURIComponent(JSON.stringify(informationProducts))), 30)
+  const onCheckoutSubmit=(event)=>{
+    event.preventDefault()
+    window.console.log(informationProducts)
+    if(CartItems && CartItems.length>0){
+      axios({
+        method: "post",
+        url: "http://localhost:4001/informationProducts",
+        data: informationProducts
+      })
+        .then(res =>{
+          setStatusApi(res.statusText);
+          window.console.log(res.data)
+          setCookie("_cart", Base64.encode(encodeURIComponent(JSON.stringify(res.data))), 30);
+
+        })
+        .catch(error => (window.console.log(error)))
+    }
+    else
+    {
+      return (alert("Vui lòng đăng ký mua sản phẩm"))
+    }
+    props.deleteCart()
+    // setCookie("_cart", Base64.encode(encodeURIComponent(JSON.stringify(informationProducts))), 30)
   }
+
+
 
   window.console.log(informationProducts)
   window.console.log(statusApi)
   if(statusApi==="Created"){
     return (<Redirect to="/hoantatgiaohang" />)
   }
+
+  // if(document.cookie){
+  //   return (<Redirect to="/hoantatgiaohang" />)
+  // }
   return (
       <section className="checkout-custom col-9">
         <VerifieOrder statusApi={statusApi}/>
-          <Form onSubmit={onSubmit}>
+          <Form onSubmit={onCheckoutSubmit}>
               <div className="checkout-information">
                   <div className="infor-customer col-8">
                     <div className="title"><h5>Thông tin thanh toán</h5></div>
@@ -194,7 +237,7 @@ const CheckoutCart=()=>
                       <FormGroup className="checkout-group">
                         <Label className="col-3 left">Tỉnh/Thành phố</Label>
                         {/*<Input  type="select" name="cityName" value={cityName} onChange={onChangeCity}>*/}
-                        <Input  className="col-9 right" type="select" name="provinceName" onChange={FindProvinceId} required>
+                        <Input  className="col-9 right" type="select" name="provinceId" onChange={FindProvinceId} required>
                           <option value="">--Chọn thành phố--</option>
                           {testsdiachiList && testsdiachiList.length>0?testsdiachiList.map((item, index)=>{
                             return(
@@ -260,5 +303,9 @@ const CheckoutCart=()=>
   );
 }
 
-export default CheckoutCart;
+const mapDispatchToProps={
+  deleteCart
+}
+
+export default connect(null, mapDispatchToProps)(CheckoutCart);
 

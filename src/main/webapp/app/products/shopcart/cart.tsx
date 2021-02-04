@@ -196,16 +196,16 @@ import {faTrashAlt, faPlus, faMinus} from '@fortawesome/free-solid-svg-icons';
 import CartContent from "app/products/shopcart/cart-content";
 import {connect} from "react-redux";
 import {IRootState} from "app/shared/reducers";
-import {RouteComponentProps } from 'react-router-dom';
+import {Link,RouteComponentProps } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {addToCart, updateInCart} from "app/products/shopcart/actions/cart.action";
 import {fetchProducts} from "app/products/shopcart/actions/product.action";
-import editor from "app/entities/editor/editor";
 
 // export interface ICartShopProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {};
 export const Cart = (props) => {
   const dispatch=useDispatch()
   const [quantity, setQuantity] = useState(1);
+  // const [cartItems, setCartItems]:any = useState([])
   useEffect(()=>{
     if(quantity>=100){
       setQuantity(100)
@@ -217,6 +217,11 @@ export const Cart = (props) => {
   useEffect(()=>{
     dispatch(props.fetchProducts)
   },[dispatch])
+
+  // useEffect(()=>{
+  //   setCartItems(props.cartItems) //todo đưa vào effect để thay đổi giá trị của cartItems khi xóa cartItems trong local storage
+  // },[cartItems])
+
   const onChangeProductQuantity=(event)=>{
     setQuantity(event.target.value)
   }
@@ -229,7 +234,6 @@ export const Cart = (props) => {
   const toggle = () => setModal(!modal);
 
   const {cartItems, products}=props;
-
   const productShops:any=products;
 
   const {productestEntity}=props;
@@ -286,7 +290,7 @@ export const Cart = (props) => {
         </ModalBody>
         <ModalFooter>
           <Button color="warning" onClick={toggle}>Tiếp tục mua hàng</Button>{' '}
-          <Button color="primary" onClick={toggle}>Tiến hành thanh toán</Button>
+          <Button tag={Link} to="/checkout" color="primary">Tiến hành thanh toán</Button>
         </ModalFooter>
       </Modal>
     </div>

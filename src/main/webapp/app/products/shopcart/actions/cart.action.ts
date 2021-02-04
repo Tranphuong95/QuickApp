@@ -1,4 +1,4 @@
-import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART } from 'app/products/shopcart/actions/types';
+import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART, DELETE_CART } from 'app/products/shopcart/actions/types';
 
 //todo kiem tra xem product co chua du lieu (khac null) moi set vao CartItems
 export const addToCart = (product, quantity) => (dispatch, getState) => {
@@ -7,6 +7,7 @@ export const addToCart = (product, quantity) => (dispatch, getState) => {
   const cartItems = getState().cartShop.cartItems.slice();
   window.console.log('add chua thanh cong');
   window.console.log(cartItems);
+  window.console.log(product);
   let alreadyExist = false;
   cartItems.forEach(x => {
     if (x.product.id === product.id) {
@@ -58,4 +59,12 @@ export const removeFromCart = product => (dispatch, getState, filter) => {
   });
   localStorage.setItem('cartItems', JSON.stringify(cartItems));
   window.console.log('set xong remove');
+};
+
+//todo test xóa localstorage khi hoàn tất mua hàng 4/2/2021
+export const deleteCart = () => dispatch => {
+  localStorage.removeItem('cartItems');
+  dispatch({
+    type: DELETE_CART,
+  });
 };

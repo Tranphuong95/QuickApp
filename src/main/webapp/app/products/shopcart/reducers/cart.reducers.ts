@@ -1,4 +1,4 @@
-import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART } from './../actions/types';
+import { ADD_TO_CART, UPDATE_IN_CART, REMOVE_FROM_CART, DELETE_CART } from './../actions/types';
 
 import { ICartShop, defaultValue } from 'app/shared/model/cart-shop.model';
 
@@ -11,7 +11,7 @@ const defaultCartState = {
   cartItem: defaultValue,
 };
 
-const initialState = dataState.cartItems ? dataState : defaultCartState;
+const initialState = dataState.cartItems && dataState.cartItems.cartItems !== null ? dataState : defaultCartState;
 export type CartState = Readonly<typeof initialState>;
 // Reducer
 export default (state: CartState = initialState, action): CartState => {
@@ -22,13 +22,15 @@ export default (state: CartState = initialState, action): CartState => {
       };
     case UPDATE_IN_CART:
       return {
-        ...state,
         cartItems: action.payload.cartItems,
       };
     case REMOVE_FROM_CART:
       return {
-        ...state,
         cartItems: action.payload.cartItems,
+      };
+    case DELETE_CART:
+      return {
+        cartItems: [],
       };
     default:
       return state;
